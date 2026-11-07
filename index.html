@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Windows Games</title>
+<style>
+:root{--bl:#0078d7;--win:#fff;--tx:#1b1b1b;--bar:#e6e6e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--win:#202020;--tx:#f0f0f0;--bar:#2d2d2d}}
+:root[data-theme="dark"]{--win:#202020;--tx:#f0f0f0;--bar:#2d2d2d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bl);font-family:"Segoe UI",system-ui,Arial,sans-serif;overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.scr{position:fixed;inset:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.hide{display:none!important}
+#bsod{background:var(--bl);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:2.2vmin;padding:6vmin 8vmin}
+.face{font-size:clamp(70px,18vmin,170px);line-height:1}
+#bsod p{margin:0;font-size:clamp(16px,3.2vmin,28px);max-width:780px}
+#pg{font-size:clamp(16px,3.2vmin,28px)}
+.row{display:flex;gap:16px;align-items:center;font-size:13px;flex-wrap:wrap}
+#qr{width:84px;height:84px}
+.btn{font:600 22px "Segoe UI",system-ui,sans-serif;padding:10px 40px;background:#fff;color:var(--bl);border:2px solid #fff;cursor:pointer;align-self:flex-start}
+.btn:hover,.btn:active{background:transparent;color:#fff}
+.row2{display:flex;gap:12px;flex-wrap:wrap}
+.btn.alt{background:transparent;color:#fff}
+.btn.alt:hover,.btn.alt:active{background:#fff;color:var(--bl)}
+.wsp{position:relative;width:48px;height:48px}
+.wsp i{position:absolute;inset:0;opacity:0;animation:ws 2.4s cubic-bezier(.3,.6,.5,.9) infinite}
+.wsp i::before{content:"";position:absolute;left:50%;top:0;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#fff}
+.wsp i:nth-child(2){animation-delay:.12s}.wsp i:nth-child(3){animation-delay:.24s}.wsp i:nth-child(4){animation-delay:.36s}.wsp i:nth-child(5){animation-delay:.48s}
+@keyframes ws{0%{transform:rotate(-30deg);opacity:0}8%{opacity:1}65%{transform:rotate(330deg);opacity:1}75%,100%{transform:rotate(390deg);opacity:0}}
+#rk{background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;padding:0 6vmin}
+#rkt{font-size:clamp(20px,4vmin,34px);font-weight:300}
+#rk .btn{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);font-size:14px;padding:6px 18px;opacity:.6}
+#rep,#mode,#opt{background:#0b63ad;color:#fff;display:flex;flex-direction:column;justify-content:center;gap:2.4vmin;padding:6vmin 8vmin}
+#rep h1,#mode h1,#opt h1{margin:0;font-weight:300;font-size:clamp(26px,6vmin,48px)}
+#rep p,#mode p{margin:0;font-size:clamp(16px,3vmin,24px)}
+.rt{display:flex;flex-direction:column;gap:6px;max-width:560px;margin:2vmin 0}
+.rt button{background:rgba(255,255,255,.15);border:2px solid transparent;color:#fff;text-align:left;padding:12px 16px;cursor:pointer;font-family:inherit}
+.rt button:hover,.rt button:active{border-color:#fff;background:rgba(255,255,255,.25)}
+.rt b{display:block;font-size:clamp(18px,3.2vmin,24px);font-weight:400}
+.rt span{font-size:clamp(13px,2.2vmin,16px);opacity:.85}
+.sx{display:none}
+body.serious .sx{display:block}
+body.serious #play,body.serious #plat{display:none}
+.eye{display:inline-block;position:relative;width:22px;height:12px;border:2px solid currentColor;border-radius:50%;vertical-align:middle;margin-right:8px}
+.eye::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;background:currentColor;border-radius:50%}
+#pk{position:absolute;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);font-size:14px;padding:8px 16px}
+#os,#cor{background:#000}
+#ocv,#ccv{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+#osh,#corh{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;max-width:70%;color:#fff;background:rgba(0,0,0,.55);padding:6px 10px;font-size:13px;pointer-events:none}
+#osv,#corv{position:absolute;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);font-size:14px;padding:6px 18px}
+.gl{display:inline-block;width:8px;height:8px;margin:0 30px 0 0;vertical-align:middle;background:currentColor;box-shadow:10px -5px currentColor,20px 4px currentColor}
+#pk2{position:absolute;left:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);font-size:14px;padding:8px 16px}
+@media(max-width:620px){#pk2{left:auto;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 62px)}}
+#corm{position:absolute;top:calc(env(safe-area-inset-top,0px) + 54px);right:10px;width:120px;height:8px;background:rgba(255,255,255,.25)}
+#corm i{display:block;height:100%;width:0}
+#crash{background:#000;color:#ddd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;font-family:Consolas,"Courier New",monospace}
+#crt{margin:0;font-size:clamp(14px,3.4vmin,26px);text-align:center;white-space:pre-wrap;word-break:break-all;max-width:90vw}
+#crb{display:flex;gap:12px}
+#crb .btn{font-size:14px;padding:8px 20px}
+#dv{margin:2vmin 6vmin 5vmin}
+#lg{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:10px;z-index:5;font:14px "Segoe UI",sans-serif;padding:6px;background:#fff;color:#111;border:2px solid #fff}
+#desk{background:linear-gradient(135deg,#0a3d91,#0078d7 55%,#00b4ff);color:#fff;display:flex;flex-direction:column}
+#desk h2{font-weight:300;font-size:clamp(22px,5vmin,40px);margin:0;padding:7vmin 6vmin 2vmin}
+#tiles{flex:1;display:flex;flex-wrap:wrap;gap:12px;padding:0 6vmin;align-content:flex-start;overflow-y:auto}
+.tile{width:min(26vw,160px);height:min(26vw,160px);border:0;color:#fff;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:12px;font:600 15px "Segoe UI",sans-serif;text-align:left}
+.tile:hover{outline:3px solid rgba(255,255,255,.7)}
+.ic{display:block;position:relative;width:62px;height:62px}
+.ic::before,.ic::after{content:"";position:absolute}
+.ic.dash{transform:rotate(-12deg)}
+.ic.dash::before{left:0;top:0;width:28px;height:28px;background:#f25022;box-shadow:33px 0 #7fba00,0 33px #00a4ef,33px 33px #ffb900}
+.ic.flap::before{inset:0;background:#fff;clip-path:polygon(15% 0,15% 85%,35% 66%,52% 100%,68% 92%,52% 58%,80% 58%)}
+.ic.flap{filter:drop-shadow(0 0 1px #000)}
+.ic.ping::before{left:0;top:6px;width:8px;height:34px;background:#fff;box-shadow:46px 20px #fff}
+.ic.ping::after{left:26px;top:28px;width:10px;height:10px;background:#ffb900;border-radius:50%}
+.ic.brk::before{left:0;top:0;width:18px;height:10px;background:#f25022;box-shadow:22px 0 #ffb900,44px 0 #7fba00,0 14px #00a4ef,22px 14px #fff,44px 14px #f25022}
+.ic.brk::after{left:10px;top:52px;width:42px;height:8px;background:#fff}
+.ic.inv::before{left:11px;top:10px;width:40px;height:22px;background:#7fba00;border-radius:7px 7px 0 0;box-shadow:4px 22px 0 -4px #7fba00,32px 22px 0 -4px #7fba00}
+.ic.inv::after{left:19px;top:17px;width:7px;height:7px;background:#000;box-shadow:16px 0 #000}
+.ic.stk::before{left:10px;top:46px;width:40px;height:12px;background:#00a4ef;box-shadow:6px -14px #7fba00,-2px -28px #ffb900,10px -42px #f25022}
+#win,#cv{touch-action:none}
+.ic.snake::before{left:0;top:0;width:14px;height:14px;background:#fff;box-shadow:16px 0 #00b4ff,32px 0 #00b4ff,32px 16px #00b4ff,32px 32px #00b4ff,16px 32px #00b4ff,48px 48px #ffb900}
+#gw{background:rgba(0,0,0,.5);z-index:10;display:flex;align-items:center;justify-content:center}
+#win{width:min(700px,96vw);background:var(--win);color:var(--tx);border:1px solid var(--bl);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.tt{display:flex;justify-content:space-between;align-items:center;background:var(--bl);color:#fff;padding-left:10px;font-size:14px}
+#x{position:relative;width:46px;height:32px;border:0;background:transparent;cursor:pointer}
+#x::before,#x::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;background:#fff;margin:-1px 0 0 -7px;transform:rotate(45deg)}
+#x::after{transform:rotate(-45deg)}
+#x:hover{background:#e81123}
+.cw{position:relative}
+#cv{display:block;width:100%;aspect-ratio:16/9;background:#000}
+#ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55)}
+.dlg{background:var(--win);color:var(--tx);padding:18px 22px;text-align:center;border:1px solid var(--bl);max-width:90%}
+.dlg b{display:block;font-size:18px;margin-bottom:6px}
+.dlg .btn{background:var(--bl);color:#fff;border-color:var(--bl);font-size:16px;padding:8px 28px;margin-top:12px;align-self:auto}
+#hint{padding:8px 12px;font-size:13px;background:var(--bar);text-align:center}
+#dp{display:grid;grid-template-columns:repeat(3,56px);gap:6px;justify-content:center;padding:10px}
+#dp button{position:relative;height:56px;border:1px solid var(--bl);background:var(--bar);color:var(--tx)}
+#dp button::before{content:"";position:absolute;left:50%;top:50%;border:0 solid transparent}
+#dp .u::before{border-width:0 10px 16px;border-bottom-color:currentColor;margin:-8px 0 0 -10px}
+#dp .d::before{border-width:16px 10px 0;border-top-color:currentColor;margin:-8px 0 0 -10px}
+#dp .l::before{border-width:10px 16px 10px 0;border-right-color:currentColor;margin:-10px 0 0 -8px}
+#dp .r::before{border-width:10px 0 10px 16px;border-left-color:currentColor;margin:-10px 0 0 -8px}
+body.mobile #win{width:100vw;border:0}
+body.mobile .btn{padding:14px 48px}
+</style></head><body>
+<select id="lg" aria-label="Language"></select>
+
+<div id="mode" class="scr">
+ <h1>Windows Games</h1>
+ <p data-i="mode"></p>
+ <div class="rt">
+  <button id="mgb"><b data-i="mg"></b><span data-i="mgd"></span></button>
+  <button id="msb"><b data-i="ms"></b><span data-i="msd"></span></button>
+ </div>
+<button class="btn alt" id="pk2"><i class="gl"></i><span data-i="corr"></span></button>
+<button class="btn alt" id="pk"><i class="eye"></i><span data-i="peek"></span></button>
+</div>
+
+<div id="bsod" class="scr hide">
+ <div class="face">:(</div>
+ <p id="bm" data-i="msg"></p>
+ <div id="pg"></div>
+ <div class="row2"><button class="btn" id="play" data-i="play"></button><button class="btn alt" id="rpo" data-i="repB"></button><button class="btn alt" id="bv" data-i="back"></button></div>
+ <div class="row"><canvas id="qr"></canvas><div><div class="sx" data-i="smore"></div><div class="sx" data-i="ssup"></div><div id="sc"></div><div id="plat"></div></div></div>
+</div>
+
+<div id="rk" class="scr hide">
+ <div class="wsp"><i></i><i></i><i></i><i></i><i></i></div>
+ <div id="rkt"></div>
+ <button class="btn alt" id="rkv" data-i="back"></button>
+</div>
+
+<div id="rep" class="scr hide">
+ <h1 data-i="repT"></h1>
+ <p data-i="repM"></p>
+ <p class="sx" data-i="repX"></p>
+ <div class="rt">
+  <button id="rrs"><b data-i="rst"></b><span data-i="rsd"></span></button>
+  <button id="rad"><b data-i="adv"></b><span id="avd" data-i="avd"></span></button>
+ </div>
+ <button class="btn alt" id="rpv" data-i="back"></button>
+</div>
+
+<div id="opt" class="scr hide">
+ <h1 data-i="choose"></h1>
+ <div class="rt">
+  <button id="oc"><b data-i="cont"></b><span data-i="contd"></span></button>
+  <button id="ot"><b data-i="tsh"></b><span data-i="tshd"></span></button>
+  <button id="oo"><b data-i="off"></b></button>
+ </div>
+ <button class="btn alt" id="ov2" data-i="back"></button>
+</div>
+
+<div id="crash" class="scr hide">
+ <pre id="crt"></pre>
+ <div id="crb" class="hide"><button class="btn alt" id="cr1" data-i="rst"></button><button class="btn alt" id="cr2" data-i="back"></button></div>
+</div>
+
+<div id="cor" class="scr hide">
+ <canvas id="ccv"></canvas>
+ <div id="corh" data-i="corH"></div>
+ <div id="corm"><i></i></div>
+ <button class="btn alt" id="corv" data-i="back"></button>
+</div>
+
+<div id="os" class="scr hide">
+ <canvas id="ocv"></canvas>
+ <div id="osh" data-i="osH"></div>
+ <button class="btn alt" id="osv" data-i="back"></button>
+</div>
+
+<div id="desk" class="scr hide">
+ <h2 data-i="pick"></h2>
+ <div id="tiles"></div>
+ <button class="btn alt" id="dv" data-i="back"></button>
+</div>
+
+<div id="gw" class="scr hide"><div id="win">
+ <div class="tt"><span id="wt"></span><button id="x" aria-label="X"></button></div>
+ <div class="cw"><canvas id="cv" width="640" height="360"></canvas>
+  <div id="ov" class="hide"><div class="dlg"><b data-i="over"></b><div id="ovs"></div><button class="btn" id="rt" data-i="retry"></button></div></div></div>
+ <div id="hint"></div>
+ <div id="dp" class="hide"><span></span><button class="u" data-d="0,-1"></button><span></span><button class="l" data-d="-1,0"></button><button class="d" data-d="0,1"></button><button class="r" data-d="1,0"></button></div>
+</div></div>
+
+<script>
+const $=s=>document.querySelector(s),W=640,H=360,c=$('#cv').getContext('2d');
+const K=['msg','pct','play','pick','score','best','over','retry','jump','move','stop','repT','repM','repB','repP','repW','rst','rsd','adv','avd','back','mode','mg','mgd','ms','msd','smsg','smore','ssup','drag','drop','repX','avs','choose','cont','contd','tsh','tshd','off','peek','osM','osN','osH','corr','corH'];
+const L={
+es:["Tu PC ha tenido un problema y necesita jugar un rato. Estamos recopilando algo de diversión y después podrás continuar.","completado","Jugar","Elige un juego","Puntos","Récord","Error fatal: has perdido","Reintentar","Toca, haz clic o pulsa Espacio para saltar","Desliza o usa las flechas para moverte","Código de detención","Reparación automática", "Tu PC no se inició correctamente", "Reparar", "Preparando la reparación automática", "Diagnosticando tu PC", "Reiniciar", "Reiniciar el PC", "Opciones avanzadas", "Jugar o solucionar problemas", "Volver","Selecciona un modo", "Modo juego", "Pantalla azul con minijuegos", "Modo serio", "La pantalla azul original, sin juegos", "Tu PC tuvo un problema y debe reiniciarse. Solo estamos recopilando información sobre el error y, después, reiniciaremos por ti.", "Para obtener más información sobre este problema y las posibles soluciones, visita https://www.windows.com/stopcode", "Si llamas a una persona de soporte técnico, dale esta información:","Arrastra o usa las flechas para mover", "Toca, haz clic o pulsa Espacio para soltar","Pulsa «Reiniciar» para reiniciar el PC, lo que a veces soluciona el problema. También puedes pulsar «Opciones avanzadas» para probar otras formas de repararlo.", "Ver otras opciones de reparación", "Elige una opción", "Continuar", "Salir y continuar con Windows 10", "Solucionar problemas", "Restablecer el PC o ver opciones avanzadas", "Apagar el PC","Ver el SO sin el BSoD", "Windows ha dejado de funcionar", "(No responde)", "Mueve el ratón o el dedo para dejar rastro","Ver el SO corrupto", "Toca o haz clic: abre una CMD. Mantén pulsado: muchas CMD siguen tu dedo"],
+en:["Your PC ran into a problem and needs to play for a bit. We’re just collecting some fun, and then you can continue.","complete","Play","Choose a game","Score","Best","Fatal error: you lost","Retry","Tap, click or press Space to jump","Swipe or use the arrow keys to move","Stop code","Automatic Repair", "Your PC did not start correctly", "Repair", "Preparing Automatic Repair", "Diagnosing your PC", "Restart", "Restart your PC", "Advanced options", "Play games or troubleshoot", "Back","Select a mode", "Game mode", "Blue screen with mini-games", "Serious mode", "The original blue screen, no games", "Your PC ran into a problem and needs to restart. We’re just collecting some error info, and then we’ll restart for you.", "For more information about this issue and possible fixes, visit https://www.windows.com/stopcode", "If you call a support person, give them this info:","Drag or use the arrow keys to move", "Tap, click or press Space to drop","Press “Restart” to restart your PC, which can sometimes fix the problem. You can also press “Advanced options” to try other ways to repair your PC.", "See advanced repair options", "Choose an option", "Continue", "Exit and continue to Windows 10", "Troubleshoot", "Reset your PC or see advanced options", "Turn off your PC","See the OS without the BSoD", "Windows has stopped working", "(Not Responding)", "Move the mouse or your finger to leave a trail","See the corrupted OS", "Tap or click: opens a CMD. Hold: many CMDs follow your finger"],
+pt:["O seu PC teve um problema e precisa jogar um pouco. Estamos coletando diversão e depois você poderá continuar.","concluído","Jogar","Escolha um jogo","Pontos","Recorde","Erro fatal: você perdeu","Tentar de novo","Toque, clique ou pressione Espaço para pular","Deslize ou use as setas para mover","Código de parada","Reparo automático", "O seu PC não iniciou corretamente", "Reparar", "Preparando o Reparo Automático", "Diagnosticando o seu PC", "Reiniciar", "Reiniciar o PC", "Opções avançadas", "Jogar ou solucionar problemas", "Voltar","Selecione um modo", "Modo jogo", "Tela azul com minijogos", "Modo sério", "A tela azul original, sem jogos", "O seu PC encontrou um problema e precisa ser reiniciado. Estamos apenas coletando algumas informações sobre o erro e, em seguida, reiniciaremos para você.", "Para obter mais informações sobre esse problema e possíveis correções, visite https://www.windows.com/stopcode", "Se você ligar para o suporte, forneça estas informações:","Arraste ou use as setas para mover", "Toque, clique ou pressione Espaço para soltar","Pressione “Reiniciar” para reiniciar o PC, o que às vezes resolve o problema. Você também pode pressionar “Opções avançadas” para tentar outras formas de reparar o PC.", "Ver opções avançadas de reparo", "Escolha uma opção", "Continuar", "Sair e continuar para o Windows 10", "Solução de problemas", "Redefinir o PC ou ver opções avançadas", "Desligar o PC","Ver o SO sem a BSoD", "O Windows parou de funcionar", "(Não está respondendo)", "Mova o mouse ou o dedo para deixar rastro","Ver o SO corrompido", "Toque ou clique: abre um CMD. Mantenha pressionado: vários CMD seguem seu dedo"],
+fr:["Votre PC a rencontré un problème et doit jouer un peu. Nous collectons du plaisir, puis vous pourrez continuer.","terminé","Jouer","Choisissez un jeu","Score","Record","Erreur fatale : vous avez perdu","Réessayer","Touchez, cliquez ou appuyez sur Espace pour sauter","Glissez ou utilisez les flèches pour bouger","Code d’arrêt","Réparation automatique", "Votre PC ne s’est pas lancé correctement", "Réparer", "Préparation de la réparation automatique", "Diagnostic de votre PC", "Redémarrer", "Redémarrer votre PC", "Options avancées", "Jouer ou résoudre les problèmes", "Retour","Sélectionnez un mode", "Mode jeu", "Écran bleu avec mini-jeux", "Mode sérieux", "L’écran bleu d’origine, sans jeux", "Votre PC a rencontré un problème et doit redémarrer. Nous collectons simplement des informations sur l’erreur, puis nous allons redémarrer pour vous.", "Pour plus d’informations sur ce problème et les solutions possibles, visitez https://www.windows.com/stopcode", "Si vous appelez le support, donnez-leur ces informations :","Glissez ou utilisez les flèches pour bouger", "Touchez, cliquez ou appuyez sur Espace pour lâcher","Appuyez sur « Redémarrer » pour redémarrer votre PC, ce qui peut parfois résoudre le problème. Vous pouvez aussi appuyer sur « Options avancées » pour essayer d’autres méthodes de réparation.", "Afficher les options de réparation avancées", "Choisir une option", "Continuer", "Quitter et continuer vers Windows 10", "Résoudre les problèmes", "Réinitialiser votre PC ou afficher les options avancées", "Éteindre votre PC","Voir l’OS sans le BSoD", "Windows a cessé de fonctionner", "(Ne répond pas)", "Bougez la souris ou le doigt pour laisser une traînée","Voir l’OS corrompu", "Touchez ou cliquez : ouvre une CMD. Maintenez : plusieurs CMD suivent votre doigt"],
+de:["Auf deinem PC ist ein Problem aufgetreten und er muss ein bisschen spielen. Wir sammeln nur etwas Spaß, dann geht es weiter.","abgeschlossen","Spielen","Wähle ein Spiel","Punkte","Rekord","Schwerer Fehler: Du hast verloren","Nochmal","Tippen, klicken oder Leertaste zum Springen","Wischen oder Pfeiltasten zum Bewegen","Stoppcode","Automatische Reparatur", "Dein PC wurde nicht richtig gestartet", "Reparieren", "Automatische Reparatur wird vorbereitet", "PC wird diagnostiziert", "Neu starten", "PC neu starten", "Erweiterte Optionen", "Spielen oder Problembehandlung", "Zurück","Modus auswählen", "Spielmodus", "Blauer Bildschirm mit Minispielen", "Ernster Modus", "Der originale Bluescreen, ohne Spiele", "Auf Ihrem PC ist ein Problem aufgetreten, und er muss neu gestartet werden. Wir sammeln nur einige Fehlerinformationen und führen dann einen Neustart für Sie durch.", "Weitere Informationen zu diesem Problem und möglichen Lösungen finden Sie unter https://www.windows.com/stopcode", "Wenn Sie den Support anrufen, geben Sie diese Informationen an:","Ziehen oder Pfeiltasten zum Bewegen", "Tippen, klicken oder Leertaste zum Fallenlassen","Drücken Sie „Neu starten“, um den PC neu zu starten. Dadurch lässt sich das Problem manchmal beheben. Sie können auch „Erweiterte Optionen“ wählen, um andere Reparaturmöglichkeiten auszuprobieren.", "Weitere Reparaturoptionen anzeigen", "Option auswählen", "Weiter", "Beenden und weiter mit Windows 10", "Problembehandlung", "PC zurücksetzen oder erweiterte Optionen anzeigen", "PC ausschalten","Das Betriebssystem ohne BSoD ansehen", "Windows funktioniert nicht mehr", "(Keine Rückmeldung)", "Maus oder Finger bewegen, um eine Spur zu hinterlassen","Das beschädigte Betriebssystem ansehen", "Tippen oder klicken: öffnet eine CMD. Gedrückt halten: viele CMDs folgen deinem Finger"],
+it:["Il PC ha riscontrato un problema e ha bisogno di giocare un po’. Stiamo raccogliendo un po’ di divertimento, poi potrai continuare.","completato","Gioca","Scegli un gioco","Punti","Record","Errore fatale: hai perso","Riprova","Tocca, clicca o premi Spazio per saltare","Scorri o usa le frecce per muoverti","Codice di arresto","Riparazione automatica", "Il PC non si è avviato correttamente", "Ripara", "Preparazione della riparazione automatica", "Diagnosi del PC in corso", "Riavvia", "Riavvia il PC", "Opzioni avanzate", "Gioca o risolvi i problemi", "Indietro","Seleziona una modalità", "Modalità gioco", "Schermata blu con minigiochi", "Modalità seria", "La schermata blu originale, senza giochi", "Il PC ha riscontrato un problema e deve essere riavviato. Stiamo raccogliendo alcune informazioni sull’errore, quindi verrà riavviato automaticamente.", "Per ulteriori informazioni su questo problema e sulle possibili soluzioni, visita https://www.windows.com/stopcode", "Se contatti il supporto, fornisci queste informazioni:","Trascina o usa le frecce per muoverti", "Tocca, clicca o premi Spazio per far cadere","Premi «Riavvia» per riavviare il PC: a volte questo risolve il problema. Puoi anche premere «Opzioni avanzate» per provare altri metodi di riparazione.", "Visualizza le opzioni di ripristino avanzate", "Scegli un’opzione", "Continua", "Esci e continua con Windows 10", "Risoluzione dei problemi", "Reimposta il PC o visualizza le opzioni avanzate", "Spegni il PC","Vedi il sistema senza il BSoD", "Windows ha smesso di funzionare", "(Non risponde)", "Muovi il mouse o il dito per lasciare una scia","Vedi il sistema corrotto", "Tocca o clicca: apre un CMD. Tieni premuto: molti CMD seguono il dito"],
+ru:["На вашем ПК возникла проблема, и ему нужно немного поиграть. Мы собираем веселье, и скоро вы сможете продолжить.","завершено","Играть","Выберите игру","Очки","Рекорд","Критическая ошибка: вы проиграли","Заново","Коснитесь, кликните или нажмите Пробел для прыжка","Свайп или стрелки для движения","Код остановки","Автоматическое восстановление", "Ваш ПК запустился неправильно", "Исправить", "Подготовка автоматического восстановления", "Диагностика ПК", "Перезагрузить", "Перезагрузить ПК", "Дополнительные параметры", "Играть или устранять неполадки", "Назад","Выберите режим", "Игровой режим", "Синий экран с мини-играми", "Серьёзный режим", "Оригинальный синий экран, без игр", "На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем информацию об ошибке, после чего перезагрузим компьютер.", "Дополнительные сведения об этой проблеме и возможных решениях: https://www.windows.com/stopcode", "Если вы обратитесь в службу поддержки, сообщите им следующее:","Перетаскивайте или используйте стрелки", "Коснитесь, кликните или нажмите Пробел, чтобы сбросить","Нажмите «Перезагрузить», чтобы перезагрузить ПК — иногда это решает проблему. Также можно нажать «Дополнительные параметры», чтобы попробовать другие способы восстановления.", "Другие параметры восстановления", "Выбор действия", "Продолжить", "Выход и использование Windows 10", "Поиск и устранение неисправностей", "Возврат ПК в исходное состояние или доп. параметры", "Выключить компьютер","Показать ОС без BSoD", "Прекращена работа Windows", "(Не отвечает)", "Двигайте мышь или палец, чтобы оставить след","Показать повреждённую ОС", "Касание или клик — откроется CMD. Удерживайте — много CMD пойдут за пальцем"],
+ja:["PC で問題が発生したため、少し遊ぶ必要があります。楽しさを収集中です。完了したら続行できます。","完了","プレイ","ゲームを選択","スコア","ハイスコア","致命的なエラー：ゲームオーバー","リトライ","タップ・クリック・スペースキーでジャンプ","スワイプか矢印キーで移動","停止コード","自動修復", "PC が正常に起動しませんでした", "修復", "自動修復を準備しています", "PC を診断しています", "再起動", "PC を再起動する", "詳細オプション", "プレイまたはトラブルシューティング", "戻る","モードを選択", "ゲームモード", "ミニゲーム付きブルースクリーン", "シリアスモード", "ゲームなしのオリジナルのブルースクリーン", "PC で問題が発生したため、再起動する必要があります。エラー情報を収集しています。その後、自動的に再起動します。", "この問題と考えられる修正方法の詳細については、https://www.windows.com/stopcode をご覧ください", "サポート担当者に連絡する場合は、次の情報をお伝えください:","ドラッグか矢印キーで移動", "タップ・クリック・スペースキーで落とす","「再起動」を押すと PC が再起動し、問題が解決することがあります。「詳細オプション」を押して、他の修復方法を試すこともできます。", "その他の修復オプションを表示します", "オプションの選択", "続行", "終了して Windows 10 に進みます", "トラブルシューティング", "PC を初期状態に戻すか、詳細オプションを表示します", "PC の電源を切る","BSoD なしの OS を見る", "Windows は動作を停止しました", "(応答なし)", "マウスや指を動かすと軌跡が残ります","破損した OS を見る", "タップ／クリックで CMD を開きます。長押しすると多数の CMD が指に付いてきます"],
+zh:["你的电脑遇到问题，需要玩一会儿。我们正在收集快乐，之后你就可以继续。","完成","开始游戏","选择游戏","得分","最高分","致命错误：你输了","重试","点击、轻触或按空格键跳跃","滑动或使用方向键移动","停止代码","自动修复", "你的电脑未能正确启动", "修复", "正在准备自动修复", "正在诊断你的电脑", "重启", "重启电脑", "高级选项", "玩游戏或排查问题", "返回","选择模式", "游戏模式", "带小游戏的蓝屏", "严肃模式", "原版蓝屏，没有游戏", "你的电脑遇到问题，需要重新启动。我们只是在收集一些错误信息，然后为你重新启动。", "有关此问题和可能的修复方法的详细信息，请访问 https://www.windows.com/stopcode", "如果致电支持人员，请向他们提供以下信息：","拖动或使用方向键移动", "点击、轻触或按空格键放下","点击“重启”可重启电脑，有时这样可以解决问题。你也可以点击“高级选项”尝试其他修复方法。", "查看高级修复选项", "选择一个选项", "继续", "退出并继续使用 Windows 10", "疑难解答", "重置电脑或查看高级选项", "关闭电脑","查看没有蓝屏的系统", "Windows 已停止工作", "（未响应）", "移动鼠标或手指留下轨迹","查看损坏的系统", "点击或轻触：打开一个 CMD。长按：大量 CMD 跟随你的手指"],
+tr:["Bilgisayarınızda bir sorun oluştu ve biraz oyun oynaması gerekiyor. Eğlence topluyoruz, sonra devam edebilirsiniz.","tamamlandı","Oyna","Bir oyun seç","Puan","Rekor","Önemli hata: kaybettin","Tekrar dene","Zıplamak için dokun, tıkla veya Boşluk’a bas","Hareket için kaydır veya ok tuşlarını kullan","Durdurma kodu","Otomatik Onarım", "Bilgisayarınız düzgün başlamadı", "Onar", "Otomatik Onarım hazırlanıyor", "Bilgisayarınız tanılanıyor", "Yeniden başlat", "Bilgisayarı yeniden başlat", "Gelişmiş seçenekler", "Oyna veya sorun gider", "Geri","Bir mod seçin", "Oyun modu", "Mini oyunlu mavi ekran", "Ciddi mod", "Orijinal mavi ekran, oyunsuz", "Bilgisayarınızda bir sorun oluştu ve yeniden başlatılması gerekiyor. Yalnızca bazı hata bilgilerini topluyoruz, ardından sizin için yeniden başlatacağız.", "Bu sorun ve olası düzeltmeler hakkında daha fazla bilgi için https://www.windows.com/stopcode adresini ziyaret edin", "Destek ekibini ararsanız şu bilgileri verin:","Hareket için sürükle veya ok tuşlarını kullan", "Bırakmak için dokun, tıkla veya Boşluk’a bas","Bilgisayarınızı yeniden başlatmak için “Yeniden başlat” düğmesine basın; bu bazen sorunu çözer. Bilgisayarınızı onarmanın diğer yollarını denemek için “Gelişmiş seçenekler”e de basabilirsiniz.", "Gelişmiş onarım seçeneklerini gör", "Bir seçenek belirleyin", "Devam et", "Çık ve Windows 10’a devam et", "Sorun Gider", "Bilgisayarınızı sıfırlayın veya gelişmiş seçenekleri görün", "Bilgisayarınızı kapatın","BSoD olmadan işletim sistemini gör", "Windows çalışmayı durdurdu", "(Yanıt vermiyor)", "İz bırakmak için fareyi veya parmağınızı hareket ettirin","Bozulmuş işletim sistemini gör", "Dokun veya tıkla: bir CMD açar. Basılı tut: birçok CMD parmağını takip eder"]};
+const N={es:'Español',en:'English',pt:'Português',fr:'Français',de:'Deutsch',it:'Italiano',ru:'Русский',ja:'日本語',zh:'中文',tr:'Türkçe'};
+let rs_='',ri,ser=false,lang='en',T={},pn=0,cur=0,G=null,raf=0,last=0,bst={},sw=null;
+try{bst=JSON.parse(localStorage.getItem('wg_best'))||{}}catch(e){}
+let sv=null;try{sv=localStorage.getItem('wg_lang')}catch(e){}
+lang=L[sv]?sv:(L[(navigator.language||'en').slice(0,2)]?(navigator.language).slice(0,2):'en');
+
+// Detección de plataforma
+const ua=navigator.userAgent,ios=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),and=/Android/i.test(ua),mob=ios||and;
+document.body.classList.toggle('mobile',mob);
+const PL=ios?'iOS':and?'Android':'Windows PC';
+$('#plat').textContent=PL;
+
+// Idiomas
+const lg=$('#lg');for(const k in N)lg.add(new Option(N[k],k));lg.value=lang;
+lg.onchange=()=>{lang=lg.value;try{localStorage.setItem('wg_lang',lang)}catch(e){}ap()};
+function ap(){T={};K.forEach((k,i)=>T[k]=L[lang][i]);$('#bm').dataset.i=ser?'smsg':'msg';$('#avd').dataset.i=ser?'avs':'avd';document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i]').forEach(e=>e.textContent=T[e.dataset.i]);
+ $('#rkt').textContent=rs_?T[rs_]:'';$('#pg').textContent=pn+'% '+T.pct;$('#sc').textContent=T.stop+': '+(ser?'CRITICAL_PROCESS_DIED':'PC_NEEDS_TO_PLAY');if(G)$('#hint').textContent=T[GS[cur].h]}
+let pi;function prog(){clearInterval(pi);pn=0;$('#pg').textContent='0% '+T.pct;pi=setInterval(()=>{if(++pn>=100)clearInterval(pi);$('#pg').textContent=pn+'% '+T.pct},30)}
+
+// Falso QR
+(function(){const q=$('#qr'),x=q.getContext('2d'),n=21,s=4;q.width=q.height=n*s;x.fillStyle='#fff';x.fillRect(0,0,n*s,n*s);x.fillStyle='#0078d7';
+ for(let i=0;i<n;i++)for(let j=0;j<n;j++){if((i<8&&j<8)||(i>12&&j<8)||(i<8&&j>12))continue;if(Math.random()<.5)x.fillRect(i*s,j*s,s,s)}
+ [[0,0],[14,0],[0,14]].forEach(([a,b])=>{x.fillStyle='#0078d7';x.fillRect(a*s,b*s,7*s,7*s);x.fillStyle='#fff';x.fillRect((a+1)*s,(b+1)*s,5*s,5*s);x.fillStyle='#0078d7';x.fillRect((a+2)*s,(b+2)*s,3*s,3*s)})})();
+
+// ---------- Juegos ----------
+function Dash(){let y=300,vy=0,rot=0,dist=0,sp=320,ob=[],nx=600;
+ const o={score:0,dead:false,
+ tap(){if(y>=300)vy=-640},
+ u(dt){sp=Math.min(560,320+dist/40);dist+=sp*dt;o.score=Math.floor(dist/10);
+  vy+=1900*dt;y+=vy*dt;if(y>=300){y=300;vy=0;rot=Math.round(rot/(Math.PI/2))*(Math.PI/2)}else rot+=dt*7;
+  while(nx<dist+W+60){const n=1+(Math.random()*3|0);ob.push({x:nx,n});nx+=n*30+360+Math.random()*220+sp*.15}
+  ob=ob.filter(b=>b.x+90-dist>-10);
+  for(const b of ob)for(let i=0;i<b.n;i++){const sx=b.x+i*30-dist;
+   if(94<sx+21&&122>sx+9&&y-4>282&&y-32<300)o.dead=true}},
+ d(){const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0a2a6b');g.addColorStop(1,'#0078d7');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle='rgba(255,255,255,.12)';for(let x=-(dist*.5%80);x<W;x+=80){c.beginPath();c.moveTo(x,0);c.lineTo(x,300);c.stroke()}
+  c.fillStyle='#111';c.fillRect(0,300,W,60);c.fillStyle='#00b4ff';c.fillRect(0,300,W,3);
+  c.fillStyle='#ff3b30';for(const b of ob)for(let i=0;i<b.n;i++){const sx=b.x+i*30-dist;c.beginPath();c.moveTo(sx,300);c.lineTo(sx+15,270);c.lineTo(sx+30,300);c.fill()}
+  c.save();c.translate(108,y-18);c.rotate(rot);const cl=['#f25022','#7fba00','#00a4ef','#ffb900'];
+  for(let i=0;i<4;i++){c.fillStyle=cl[i];c.fillRect(-17+(i%2)*18,-17+(i>>1)*18,16,16)}c.restore()}};
+ return o}
+
+function Flap(){let y=170,vy=0,t=1.2,ps=[];
+ const o={score:0,dead:false,
+ tap(){vy=-420},
+ u(dt){vy+=1500*dt;y+=vy*dt;t+=dt;
+  if(t>1.5){t=0;ps.push({x:W,gy:40+Math.random()*120,p:false})}
+  for(const p of ps){p.x-=170*dt;if(!p.p&&p.x+56<140){p.p=true;o.score++}
+   if(152>p.x&&128<p.x+56&&(y-11<p.gy||y+11>p.gy+140))o.dead=true}
+  ps=ps.filter(p=>p.x>-60);if(y<11||y>329)o.dead=true},
+ d(){c.fillStyle='#4aa8ff';c.fillRect(0,0,W,H);c.fillStyle='rgba(255,255,255,.5)';c.fillRect(60,50,90,18);c.fillRect(380,90,120,18);
+  for(const p of ps){c.fillStyle='#d0d7de';c.fillRect(p.x,0,56,p.gy);c.fillRect(p.x,p.gy+140,56,340-p.gy-140);
+   c.fillStyle='#0078d7';c.fillRect(p.x,p.gy-18,56,18);c.fillRect(p.x,p.gy+140,56,18);
+   c.strokeStyle='#fff';c.lineWidth=2;[p.gy-9,p.gy+149].forEach(q=>{c.beginPath();c.moveTo(p.x+38,q-4);c.lineTo(p.x+46,q+4);c.moveTo(p.x+46,q-4);c.lineTo(p.x+38,q+4);c.stroke()})}
+  c.fillStyle='#111';c.fillRect(0,340,W,20);c.fillStyle='#0078d7';c.fillRect(0,340,28,20);
+  c.save();c.translate(140,y);c.rotate(Math.max(-.5,Math.min(.9,vy/600)));c.scale(1.3,1.3);c.fillStyle='#fff';c.strokeStyle='#000';c.lineWidth=1.5;
+  c.beginPath();c.moveTo(-8,-12);c.lineTo(-8,10);c.lineTo(-3,5);c.lineTo(2,14);c.lineTo(6,12);c.lineTo(1,3);c.lineTo(8,3);c.closePath();c.fill();c.stroke();c.restore()}};
+ return o}
+
+function Snake(){const cs=20,cols=32,rows=18;let s=[{x:10,y:9},{x:9,y:9},{x:8,y:9}],d={x:1,y:0},nd=d,acc=0,f;
+ const nf=()=>{do f={x:Math.random()*cols|0,y:Math.random()*rows|0};while(s.some(p=>p.x===f.x&&p.y===f.y))};nf();
+ const o={score:0,dead:false,
+ dir(x,y){if(!(x===-d.x&&y===-d.y))nd={x,y}},
+ u(dt){acc+=dt;if(acc<.11)return;acc=0;d=nd;const h={x:s[0].x+d.x,y:s[0].y+d.y};
+  if(h.x<0||h.y<0||h.x>=cols||h.y>=rows||s.some(p=>p.x===h.x&&p.y===h.y)){o.dead=true;return}
+  s.unshift(h);if(h.x===f.x&&h.y===f.y){o.score+=10;nf()}else s.pop()},
+ d(){c.fillStyle='#0b1f3a';c.fillRect(0,0,W,H);
+  c.fillStyle='#ffb900';c.fillRect(f.x*cs+2,f.y*cs+4,16,12);c.fillRect(f.x*cs+2,f.y*cs+2,7,3);
+  s.forEach((p,i)=>{c.fillStyle=i?'#00b4ff':'#fff';c.fillRect(p.x*cs+1,p.y*cs+1,cs-2,cs-2)})}};
+ return o}
+
+function Ping(){let py=145,ay=145,bx=320,by=180,vx=-300,vy=120;
+ const o={score:0,dead:false,mv(x,y){py=y-35},dir(x,y){py+=y*40},
+ u(dt){py=Math.max(0,Math.min(290,py));ay=Math.max(0,Math.min(290,ay+Math.max(-230*dt,Math.min(230*dt,by-35-ay))));
+  bx+=vx*dt;by+=vy*dt;if(by<7||by>353){vy=-vy;by=by<7?7:353}
+  if(vx<0&&bx<37&&bx>20&&by>py-4&&by<py+74){vx=-vx*1.06;vy=Math.max(-420,Math.min(420,vy+(by-py-35)*4));o.score++;bx=37}
+  if(vx>0&&bx>603&&bx<620&&by>ay-4&&by<ay+74){vx=-vx;vy=Math.max(-420,Math.min(420,vy+(by-ay-35)*3));bx=603}
+  if(bx<0)o.dead=true;if(bx>640){o.score+=5;bx=320;by=180;vx=-300;vy=(Math.random()*2-1)*180}},
+ d(){c.fillStyle='#0b1f3a';c.fillRect(0,0,W,H);c.fillStyle='rgba(255,255,255,.2)';for(let y=0;y<H;y+=30)c.fillRect(318,y,4,16);
+  c.fillStyle='#00b4ff';c.fillRect(20,py,10,70);c.fillStyle='#fff';c.fillRect(610,ay,10,70);c.fillStyle='#ffb900';c.fillRect(bx-7,by-7,14,14)}};
+ return o}
+
+function Brk(){let px=275,bx=320,by=250,vx=180,vy=-260,br=[];
+ const mk=()=>{br=[];for(let j=0;j<5;j++)for(let i=0;i<10;i++)br.push({x:20+i*60,y:50+j*22,j})};mk();
+ const cl=['#f25022','#ffb900','#7fba00','#00a4ef','#fff'];
+ const o={score:0,dead:false,mv(x){px=x-45},dir(x){px+=x*40},
+ u(dt){px=Math.max(0,Math.min(550,px));bx+=vx*dt;by+=vy*dt;
+  if(bx<6||bx>634){vx=-vx;bx=bx<6?6:634}if(by<6){vy=-vy;by=6}
+  if(vy>0&&by>332&&by<346&&bx>px-4&&bx<px+94){vy=-Math.abs(vy);vx=(bx-px-45)*6}
+  if(by>370)o.dead=true;
+  for(let i=0;i<br.length;i++){const b=br[i];if(bx>b.x-6&&bx<b.x+64&&by>b.y-6&&by<b.y+24){br.splice(i,1);vy=-vy;o.score+=10;break}}
+  if(!br.length){mk();vy=-Math.abs(vy)*1.1;vx*=1.1}},
+ d(){c.fillStyle='#0b1f3a';c.fillRect(0,0,W,H);br.forEach(b=>{c.fillStyle=cl[b.j];c.fillRect(b.x,b.y,58,18)});
+  c.fillStyle='#00b4ff';c.fillRect(px,340,90,10);c.fillStyle='#fff';c.beginPath();c.arc(bx,by,6,0,7);c.fill()}};
+ return o}
+
+function Inv(){let px=300,bl=[],eb=[],iv=[],dx=1,sp=55,ft=0,wv=0;
+ const mk=()=>{iv=[];for(let j=0;j<4;j++)for(let i=0;i<8;i++)iv.push({x:60+i*54,y:50+j*36,j});dx=1;sp=55+wv*15};mk();
+ const cl=['#f25022','#ffb900','#7fba00','#00a4ef'];
+ const o={score:0,dead:false,mv(x){px=x-15},dir(x){px+=x*40},
+ u(dt){px=Math.max(0,Math.min(610,px));ft+=dt;if(ft>.35){ft=0;bl.push({x:px+14,y:326})}
+  bl.forEach(b=>b.y-=420*dt);eb.forEach(b=>b.y+=240*dt);
+  let hit=false;for(const v of iv){v.x+=dx*sp*dt;if(v.x<8||v.x>602)hit=true}
+  if(hit){dx=-dx;iv.forEach(v=>{v.y+=14;v.x+=dx*4})}
+  for(const b of bl)for(let i=0;i<iv.length;i++){const v=iv[i];if(b.x>v.x&&b.x<v.x+30&&b.y>v.y&&b.y<v.y+20){iv.splice(i,1);b.y=-99;o.score+=10;break}}
+  bl=bl.filter(b=>b.y>0);
+  if(iv.length&&Math.random()<dt*(1.2+wv*.3)){const v=iv[Math.random()*iv.length|0];eb.push({x:v.x+15,y:v.y+20})}
+  eb=eb.filter(b=>b.y<H);for(const b of eb)if(b.x>px&&b.x<px+30&&b.y>322&&b.y<345)o.dead=true;
+  if(iv.some(v=>v.y>300))o.dead=true;if(!iv.length){wv++;mk()}},
+ d(){c.fillStyle='#050d1f';c.fillRect(0,0,W,H);
+  iv.forEach(v=>{c.fillStyle=cl[v.j];c.fillRect(v.x,v.y,30,14);c.fillRect(v.x+4,v.y+14,6,6);c.fillRect(v.x+20,v.y+14,6,6);c.fillStyle='#000';c.fillRect(v.x+7,v.y+4,5,5);c.fillRect(v.x+18,v.y+4,5,5)});
+  c.fillStyle='#fff';bl.forEach(b=>c.fillRect(b.x-1,b.y,3,10));c.fillStyle='#ff3b30';eb.forEach(b=>c.fillRect(b.x-1,b.y,3,10));
+  c.fillStyle='#00b4ff';c.fillRect(px,332,30,10);c.fillRect(px+12,326,6,6)}};
+ return o}
+
+function Stack(){let bs=[{x:220,w:200}],x=0,w=200,dr=1,sp=200;
+ const o={score:0,dead:false,
+ tap(){const t=bs[bs.length-1];if(Math.abs(x-t.x)<5)x=t.x;const l=Math.max(x,t.x),r=Math.min(x+w,t.x+t.w);if(r-l<=2){o.dead=true;return}
+  bs.push({x:l,w:r-l});w=r-l;o.score++;sp=Math.min(420,200+o.score*10)},
+ u(dt){x+=dr*sp*dt;if(x<0){x=0;dr=1}if(x+w>W){x=W-w;dr=-1}},
+ d(){const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0a2a6b');g.addColorStop(1,'#00b4ff');c.fillStyle=g;c.fillRect(0,0,W,H);
+  const off=Math.max(0,(bs.length-9)*24);bs.forEach((b,i)=>{c.fillStyle='hsl('+(200+i*14)+',80%,55%)';c.fillRect(b.x,336-i*24+off,b.w,22)});
+  c.fillStyle='#fff';c.fillRect(x,336-bs.length*24+off,w,22);c.fillStyle='#111';c.fillRect(0,358,W,2)}};
+ return o}
+
+const GS=[{n:'Dash.exe',i:'dash',c:'#d83b01',f:Dash,h:'jump'},{n:'Flap.dll',i:'flap',c:'#107c10',f:Flap,h:'jump'},{n:'Snake.sys',i:'snake',c:'#8e24aa',f:Snake,h:'move'},{n:'Ping.exe',i:'ping',c:'#0063b1',f:Ping,h:'drag'},{n:'Break.bat',i:'brk',c:'#5c2d91',f:Brk,h:'drag'},{n:'Invade.scr',i:'inv',c:'#2d7d9a',f:Inv,h:'drag'},{n:'Stack.cab',i:'stk',c:'#ca5010',f:Stack,h:'drop'}];
+GS.forEach((g,i)=>{const b=document.createElement('button');b.className='tile';b.style.background=g.c;b.innerHTML='<i class="ic '+g.i+'"></i>'+g.n;b.onclick=()=>start(i);$('#tiles').append(b)});
+
+// ---------- Motor ----------
+function start(i){cur=i;G=GS[i].f();$('#wt').textContent='Windows Games - '+GS[i].n;$('#gw').classList.remove('hide');$('#ov').classList.add('hide');
+ $('#dp').classList.toggle('hide',!(mob&&GS[i].f===Snake));$('#hint').textContent=T[GS[i].h];
+ cancelAnimationFrame(raf);last=performance.now();raf=requestAnimationFrame(loop)}
+function loop(ts){const dt=Math.min(.033,(ts-last)/1000);last=ts;if(!G.dead){G.u(dt);if(G.dead)over()}G.d();
+ c.fillStyle='#fff';c.shadowColor='#000';c.shadowBlur=4;c.font='bold 18px "Segoe UI",sans-serif';c.fillText(T.score+': '+G.score+'   '+T.best+': '+(bst[cur]||0),12,26);c.shadowBlur=0;
+ if(!G.dead)raf=requestAnimationFrame(loop)}
+function over(){bst[cur]=Math.max(bst[cur]||0,G.score);try{localStorage.setItem('wg_best',JSON.stringify(bst))}catch(e){}
+ $('#ovs').textContent=T.score+': '+G.score+' · '+T.best+': '+bst[cur];$('#ov').classList.remove('hide')}
+function close(){cancelAnimationFrame(raf);G=null;$('#gw').classList.add('hide')}
+
+function show(id){['#mode','#bsod','#rk','#rep','#opt','#os','#cor','#crash','#desk'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
+function rstop(){clearTimeout(ri);rs_=''}
+function rstage(k){rs_=k;$('#rkt').textContent=T[k]}
+let og,ow,oh,oi,on=0,lp=[-99,-99];
+function dlg(g,px,py,t,m){g.fillStyle='#fff';g.fillRect(px,py,300,130);g.strokeStyle='#0078d7';g.lineWidth=1;g.strokeRect(px+.5,py+.5,299,129);
+ g.fillStyle='#0078d7';g.fillRect(px,py,300,28);g.fillStyle='#fff';g.font='13px "Segoe UI",sans-serif';g.fillText(t,px+10,py+19,240);
+ g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.moveTo(px+276,py+9);g.lineTo(px+286,py+19);g.moveTo(px+286,py+9);g.lineTo(px+276,py+19);g.stroke();
+ g.fillStyle='#e81123';g.beginPath();g.arc(px+34,py+68,15,0,7);g.fill();
+ g.strokeStyle='#fff';g.beginPath();g.moveTo(px+28,py+62);g.lineTo(px+40,py+74);g.moveTo(px+40,py+62);g.lineTo(px+28,py+74);g.stroke();
+ g.fillStyle='#1b1b1b';g.font='14px "Segoe UI",sans-serif';g.fillText(m,px+60,py+73,230);
+ g.fillStyle='#e1e1e1';g.fillRect(px+210,py+98,70,24);g.fillStyle='#000';g.font='13px "Segoe UI",sans-serif';g.fillText('OK',px+236,py+115)}
+function osStart(){show('#os');const cv=$('#ocv');og=cv.getContext('2d');ow=cv.width=innerWidth;oh=cv.height=innerHeight;
+ const bg=og.createLinearGradient(0,0,ow,oh);bg.addColorStop(0,'#0a3d91');bg.addColorStop(.55,'#0078d7');bg.addColorStop(1,'#00b4ff');og.fillStyle=bg;og.fillRect(0,0,ow,oh);
+ GS.forEach((q,i)=>{const x=24+((i/6)|0)*90,y=24+(i%6)*74;og.fillStyle=q.c;og.fillRect(x,y,40,40);og.fillStyle='#fff';og.font='12px "Segoe UI",sans-serif';og.fillText(q.n,x,y+56)});
+ dlg(og,ow/2-150,oh/2-65,'Windows Games '+T.osN,T.osM);on=0;clearInterval(oi);
+ oi=setInterval(()=>{if(on<22){dlg(og,Math.random()*(ow-300),Math.random()*(oh-130),'Windows',T.osM);on++}
+  else{const y=Math.random()*oh|0,sh=8+Math.random()*50|0;og.drawImage(cv,0,y,ow,sh,(Math.random()*50-25)|0,y,ow,sh)}},350)}
+function osStop(){clearInterval(oi);show('#mode')}
+$('#ocv').addEventListener('pointermove',e=>{if(!og)return;const q=e.target.getBoundingClientRect(),X=e.clientX-q.left,Y=e.clientY-q.top;
+ if(Math.hypot(X-lp[0],Y-lp[1])>14){lp=[X,Y];dlg(og,X-150,Y-14,'Windows Games '+T.osN,T.osM)}});
+$('#pk').onclick=osStart;$('#osv').onclick=osStop;
+const COR_EVERY=300000;
+let cg,cw,ch,ci,cb=[],ct=0,cm=[],pp=[0,0],pd=false,ht,hi,ap_=[],ai,fx=0,mp=[-99,-99],xi,xt;const BS=String.fromCharCode(92);
+const rn=(a,b)=>a+Math.random()*(b-a),pal=['#f25022','#7fba00','#00a4ef','#ffb900','#000','#fff','#ff00ff','#00ffff'],GC='▒░#@%&?!/|01xX*';
+const gb=n=>{let t='';for(let i=0;i<n;i++)t+=GC[Math.random()*GC.length|0];return t};
+function cwin(g,x,y,ww,hh,n,col){g.fillStyle='#fff';g.fillRect(x,y,ww,hh);g.fillStyle=Math.random()<.15?pal[Math.random()*pal.length|0]:(col||'#0078d7');g.fillRect(x,y,ww,26);
+ g.fillStyle='#fff';g.font='13px "Segoe UI",sans-serif';g.fillText((Math.random()<.25?gb(n.length):n)+' '+T.osN,x+8,y+18,ww-60);
+ g.fillStyle='#000';g.font='12px monospace';for(let k=0;k<3;k++)g.fillText(gb(32),x+8,y+48+k*18,ww-16);
+ for(let k=0;k<6;k++){g.fillStyle=pal[Math.random()*pal.length|0];g.fillRect(x+rn(0,ww-30),y+rn(26,hh-10),rn(6,40),rn(4,24))}
+ g.fillStyle='#ccc';g.fillRect(x+8,y+hh-18,ww-16,8);g.fillStyle='#0078d7';g.fillRect(x+8,y+hh-18,(ww-16)*.3,8)}
+function corTick(){const g=cg,w=cw,h=ch,cv=$('#ccv');ct++;
+ const st=Math.min(130,ct*.02+cm.length*1.2+cb.length*.15+ap_.length*4),s=Math.min(1,st/100);if(st>=100){crash();return}
+ const bg=g.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#0a3d91');bg.addColorStop(.55,'#0078d7');bg.addColorStop(1,'#00b4ff');g.fillStyle=bg;g.fillRect(0,0,w,h);
+ GS.forEach((q,i)=>{if(Math.random()<.1)return;const x=24+((i/6)|0)*90+rn(-4,4),y=24+(i%6)*74+(Math.random()<.05?rn(-60,60):0);
+  g.fillStyle=Math.random()<.1?'#000':q.c;g.fillRect(x,y,40,Math.random()<.1?rn(10,70):40);g.fillStyle='#fff';g.font='12px "Segoe UI",sans-serif';g.fillText(Math.random()<.2?gb(q.n.length):q.n,x,y+56)});
+ [[.28,.12,'Explorer'],[.42,.3,'Dash.exe'],[.12,.42,'Windows Games']].forEach(([a,b,n])=>{const ww=Math.min(300,w*.62),x=w*a*.8+rn(-3,3),y=h*b+rn(-3,3);
+  g.globalAlpha=.35;cwin(g,x+rn(-25,25),y+rn(-25,25),ww,150,n);g.globalAlpha=1;cwin(g,x,y,ww,150,n)});
+ ap_.forEach(a=>cwin(g,a.x+rn(-2,2),a.y+rn(-2,2),210,130,a.n,a.c));
+ dlg(g,Math.max(0,Math.min(w-300,w/2-150+rn(-6,6))),h*.62,'Windows',T.osM);cm.forEach(c=>ccmd(g,c));
+ const tb=46;for(let x=0;x<w;x+=22){const off=Math.sin(ct/3+x/40)*8+(Math.random()<.08?rn(-30,30):0),hh=tb+(Math.random()<.1?rn(-20,40):0);
+  g.fillStyle=Math.random()<.06?pal[Math.random()*pal.length|0]:'#141414';g.fillRect(x,h-hh+off,22,hh+40)}
+ g.fillStyle='#0078d7';g.fillRect(0,h-tb+rn(-6,6),rn(30,70),tb+rn(-10,10));
+ for(let k=0;k<4;k++){g.fillStyle='#3a3a3a';g.fillRect(90+k*70+rn(-6,6),h-tb+rn(-8,8),rn(30,64),rn(24,52))}
+ g.fillStyle='#fff';g.font='13px sans-serif';g.fillText(gb(6),w-70,h-tb/2+rn(-8,8));
+ for(let k=0;k<2+(s*4|0);k++)cb.push({x:rn(0,w),y:rn(0,h),w:rn(12,90),h:rn(12,70),c:Math.random()<.8?'#000':pal[Math.random()*pal.length|0],l:rn(8,60)});
+ cb=cb.filter(b=>(b.l-=1)>0).slice(-90);cb.forEach(b=>{g.fillStyle=b.c;g.fillRect(b.x,b.y,b.w,b.h)});
+ const nt=2+(s*8|0);
+ for(let k=0;k<nt;k++){const y=Math.random()*h|0,sh=6+Math.random()*40|0;g.drawImage(cv,0,y,w,sh,(Math.random()*(40+60*s)-(20+30*s))|0,y,w,sh)}
+ for(let k=0;k<s*4;k++){const sw=rn(30,140)|0,sh=rn(20,90)|0;g.drawImage(cv,rn(0,w-sw)|0,rn(0,h-sh)|0,sw,sh,rn(0,w-sw)|0,rn(0,h-sh)|0,sw,sh)}
+ if(Math.random()<.25+s*.5){g.globalCompositeOperation='difference';g.fillStyle='#fff';g.fillRect(rn(0,w),rn(0,h),rn(40,260),rn(6,60));g.globalCompositeOperation='source-over'}
+ if(s>.3){g.globalAlpha=.25*s;g.drawImage(cv,rn(-14,14)|0,rn(-6,6)|0);g.globalAlpha=1}
+ g.fillStyle='rgba(0,0,0,'+(.05+.08*s)+')';for(let y=0;y<h;y+=3)g.fillRect(0,y,w,1);
+ if(fx>0){g.fillStyle='rgba(255,255,255,.7)';g.fillRect(0,0,w,h);fx--}
+ const r0=Math.random();if(r0<.015+.04*s){g.fillStyle='#000';g.fillRect(0,0,w,h)}else if(r0>.99-.01*s){g.fillStyle='#0078d7';g.fillRect(0,0,w,h);g.fillStyle='#fff';g.font='bold 90px "Segoe UI",sans-serif';g.fillText(':(',w/2-40,h/2)}
+ if(mp[0]>-90){g.save();g.translate(mp[0]+rn(-2,2)*s*3,mp[1]+rn(-2,2)*s*3);g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=1.5;g.beginPath();g.moveTo(0,0);g.lineTo(0,17);g.lineTo(4.5,13);g.lineTo(8,20);g.lineTo(11,18.5);g.lineTo(7.5,12);g.lineTo(13,12);g.closePath();g.fill();g.stroke();g.restore()}
+ const mi=$('#corm i');mi.style.width=Math.min(100,st)+'%';mi.style.background='hsl('+(120-s*120)+',80%,50%)'}
+function corStart(){show('#cor');const cv=$('#ccv');cg=cv.getContext('2d');cw=cv.width=innerWidth;ch=cv.height=innerHeight;cb=[];cm=[];ap_=[];mp=[-99,-99];fx=0;ct=0;clearInterval(ci);ci=setInterval(corTick,120);clearInterval(ai);ai=setInterval(appsOpen,COR_EVERY);corTick()}
+function corStop(){clearInterval(ci);clearInterval(ai);holdEnd();show('#mode')}
+$('#ccv').addEventListener('pointerdown',e=>{if(!cg)return;const q=e.target.getBoundingClientRect(),X=e.clientX-q.left,Y=e.clientY-q.top;
+ for(let k=0;k<10;k++)cb.push({x:X+rn(-80,80),y:Y+rn(-80,80),w:rn(10,60),h:rn(10,60),c:'#000',l:rn(20,90)});addCmd(X,Y);pp=[X,Y];pd=true;clearTimeout(ht);clearInterval(hi);ht=setTimeout(()=>{hi=setInterval(()=>addCmd(pp[0],pp[1]),70)},280)});
+function appsOpen(){GS.forEach(q=>ap_.push({n:q.n,c:q.c,x:rn(0,Math.max(1,cw-210)),y:rn(30,Math.max(31,ch-170))}));ap_=ap_.slice(-21);fx=4}
+function crash(){clearInterval(ci);clearInterval(ai);holdEnd();show('#crash');$('#crb').classList.add('hide');clearInterval(xi);clearTimeout(xt);
+ const t='System Operating Missing',pre=$('#crt');
+ if(Math.random()<.5){let i=0;xi=setInterval(()=>{i++;pre.textContent=t.slice(0,i)+((i<t.length||(i/6|0)%2)?'_':'')},90)}
+ else{const hx=[...t].map(ch=>ch.charCodeAt(0).toString(16).toUpperCase()).join(' ');
+  xi=setInterval(()=>{let o=hx+'\n\n';for(let k=0;k<6;k++){let l='';for(let j=0;j<8;j++)l+=(Math.random()*65536|0).toString(16).toUpperCase().padStart(4,'0')+' ';o+=l+'\n'}pre.textContent=o},180)}
+ xt=setTimeout(()=>$('#crb').classList.remove('hide'),4000)}
+function crashStop(){clearInterval(xi);clearTimeout(xt)}
+$('#cr1').onclick=()=>{crashStop();corStart()};$('#cr2').onclick=()=>{crashStop();show('#mode')};
+const addCmd=(X,Y)=>{cm.push({x:X-135+rn(-10,10),y:Y-14+rn(-10,10),l:['Microsoft Windows [Version 10.0.19045]','(c) Microsoft Corporation.',gb(30),'C:'+BS+'Users'+BS+'PC>']});cm=cm.slice(-70)};
+function ccmd(g,c){const x=c.x+rn(-1,1),y=c.y+rn(-1,1);g.fillStyle='#000';g.fillRect(x,y,270,120);g.strokeStyle='#888';g.lineWidth=1;g.strokeRect(x+.5,y+.5,269,119);
+ g.fillStyle='#fff';g.fillRect(x,y,270,22);g.fillStyle='#000';g.fillRect(x+5,y+5,12,12);g.font='11px "Segoe UI",sans-serif';g.fillText('C:'+BS+'Windows'+BS+'System32'+BS+'cmd.exe',x+22,y+15,200);
+ g.strokeStyle='#000';g.beginPath();g.moveTo(x+252,y+6);g.lineTo(x+262,y+16);g.moveTo(x+262,y+6);g.lineTo(x+252,y+16);g.stroke();
+ g.fillStyle='#ccc';g.font='12px Consolas,monospace';c.l.forEach((t,i)=>g.fillText(t+(i===3&&ct%2?'_':''),x+6,y+40+i*18,258))}
+function holdEnd(){clearTimeout(ht);clearInterval(hi);pd=false}
+$('#ccv').addEventListener('pointermove',e=>{const q=e.target.getBoundingClientRect();mp=[e.clientX-q.left,e.clientY-q.top];if(pd)pp=mp});
+addEventListener('pointerup',holdEnd);addEventListener('pointercancel',holdEnd);
+$('#pk2').onclick=corStart;$('#corv').onclick=corStop;
+const go=m=>{ser=m;document.body.classList.toggle('serious',m);ap();prog();show('#bsod')};
+$('#mgb').onclick=()=>go(false);$('#msb').onclick=()=>go(true);$('#bv').onclick=()=>show('#mode');
+$('#play').onclick=()=>show('#desk');
+$('#dv').onclick=()=>show('#bsod');
+const rpair=()=>{show('#rk');rstage('repP');ri=setTimeout(()=>{rstage('repW');ri=setTimeout(()=>{rstop();show('#rep')},3200)},3200)};
+$('#rpo').onclick=rpair;
+$('#oc').onclick=()=>show('#bsod');$('#ot').onclick=rpair;$('#oo').onclick=()=>show('#mode');$('#ov2').onclick=()=>show('#rep');
+$('#rkv').onclick=()=>{rstop();show('#bsod')};
+$('#rpv').onclick=()=>show('#bsod');
+$('#rrs').onclick=()=>show('#bsod');
+$('#rad').onclick=()=>show(ser?'#opt':'#desk');
+$('#x').onclick=close;$('#rt').onclick=()=>start(cur);
+$('#win').addEventListener('pointerdown',e=>{if(!G||G.dead||e.target.closest('#x,#dp,#ov'))return;sw={x:e.clientX,y:e.clientY};if(G.tap)G.tap();if(G.mv)G.mv(...cp(e))});
+const cp=e=>{const q=$('#cv').getBoundingClientRect();return[(e.clientX-q.left)/q.width*W,(e.clientY-q.top)/q.height*H]};
+addEventListener('pointermove',e=>{if(G&&G.mv&&!G.dead)G.mv(...cp(e))});
+addEventListener('pointerup',e=>{if(!G||!sw||!G.dir||G.mv)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;sw=null;
+ if(Math.max(Math.abs(dx),Math.abs(dy))<25)return;Math.abs(dx)>Math.abs(dy)?G.dir(dx>0?1:-1,0):G.dir(0,dy>0?1:-1)});
+document.querySelectorAll('#dp button').forEach(b=>b.onpointerdown=e=>{e.stopPropagation();if(G&&G.dir&&!G.dead)G.dir(...b.dataset.d.split(',').map(Number))});
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#os').classList.contains('hide')){osStop();return}if(!$('#cor').classList.contains('hide')){corStop();return}if(!$('#crash').classList.contains('hide')){crashStop();show('#mode');return}}if(e.key==='Escape'&&rs_){rstop();show('#bsod');return}if(!G)return;const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];
+ if(e.key==='Escape')return close();
+ if(e.key===' '||m)e.preventDefault();
+ if(G.dead){if(e.key===' '||e.key==='Enter')start(cur);return}
+ if(G.dir&&m)G.dir(m[0],m[1]);else if(G.tap&&(e.key===' '||e.key==='ArrowUp'||e.key==='w'))G.tap()});
+ap();
+</script></body></html>
